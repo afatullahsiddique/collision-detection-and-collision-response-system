@@ -1,0 +1,6 @@
+/home/farabi/Documents/najmul-project/collision_detection_and_response_system/build/CMakeFiles/CollisionEngine.dir
+/home/farabi/Documents/najmul-project/collision_detection_and_response_system/build/CMakeFiles/edit_cache.dir
+/home/farabi/Documents/najmul-project/collision_detection_and_response_system/build/CMakeFiles/rebuild_cache.dir
+/home/farabi/Documents/najmul-project/collision_detection_and_response_system/build/external/glad/CMakeFiles/glad.dir
+/home/farabi/Documents/najmul-project/collision_detection_and_response_system/build/external/glad/CMakeFiles/edit_cache.dir
+/home/farabi/Documents/najmul-project/collision_detection_and_response_system/build/external/glad/CMakeFiles/rebuild_cache.dir
