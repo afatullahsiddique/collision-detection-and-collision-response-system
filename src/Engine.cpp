@@ -109,6 +109,9 @@ void Engine::update() {
         }
     }
     
+    // Check window boundaries
+    checkBounds();
+    
     frameCount++;
     simulationTime += deltaTime;
     
@@ -168,5 +171,55 @@ void Engine::shutdown() {
     if (window) {
         glfwDestroyWindow(window);
         glfwTerminate();
+    }
+}
+
+void Engine::checkBounds() {
+    // Boundary constants (window is 1200x800)
+    const float BOUNDARY_LEFT = 0.0f;
+    const float BOUNDARY_RIGHT = WINDOW_WIDTH;
+    const float BOUNDARY_TOP = 0.0f;
+    const float BOUNDARY_BOTTOM = WINDOW_HEIGHT;
+    const float BOUNCE_DAMPING = 0.8f;  // Energy loss on bounce
+    
+    for (RigidBody* body : physicsWorld.bodies) {
+        if (!body) continue;
+        
+        Circle* circle = nullptr;
+        if (body->shape->getType() == ShapeType::Circle) {
+            circle = static_cast<Circle*>(body->shape.get());
+        }
+        
+        if (!circle) continue;
+        
+        float radius = circle->radius;
+        
+        // Check left boundary
+        if (body->position.x - radius < BOUNDARY_LEFT) {
+            body->position.x = BOUNDARY_LEFT + radius;
+            body->velocity.x *= -BOUNCE_DAMPING;
+            std::cout << "Body " << (body - physicsWorld.bodies[0]) << " bounced off LEFT boundary\n";
+        }
+        
+        // Check right boundary
+        if (body->position.x + radius > BOUNDARY_RIGHT) {
+            body->position.x = BOUNDARY_RIGHT - radius;
+            body->velocity.x *= -BOUNCE_DAMPING;
+            std::cout << "Body " << (body - physicsWorld.bodies[0]) << " bounced off RIGHT boundary\n";
+        }
+        
+        // Check top boundary
+        if (body->position.y - radius < BOUNDARY_TOP) {
+            body->position.y = BOUNDARY_TOP + radius;
+            body->velocity.y *= -BOUNCE_DAMPING;
+            std::cout << "Body " << (body - physicsWorld.bodies[0]) << " bounced off TOP boundary\n";
+        }
+        
+        // Check bottom boundary
+        if (body->position.y + radius > BOUNDARY_BOTTOM) {
+            body->position.y = BOUNDARY_BOTTOM - radius;
+            body->velocity.y *= -BOUNCE_DAMPING;
+            std::cout << "Body " << (body - physicsWorld.bodies[0]) << " bounced off BOTTOM boundary\n";
+        }
     }
 }

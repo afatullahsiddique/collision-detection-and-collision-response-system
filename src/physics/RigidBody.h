@@ -10,16 +10,21 @@ public:
     Vec2 force;
     float mass;
     float restitution;
+    float dragCoefficient;  // Drag force coefficient (higher = more drag)
 
     std::shared_ptr<Shape> shape;
 
     RigidBody(std::shared_ptr<Shape> s, float m)
-        : shape(s), mass(m), restitution(0.8f) {}
+        : shape(s), mass(m), restitution(0.8f), dragCoefficient(0.02f) {}
 
     void integrate(float dt) {
-        Vec2 acceleration = force * (1.0f / mass);
+        // Apply drag force: F_drag = -dragCoefficient * velocity
+        Vec2 dragForce = velocity * (-dragCoefficient);
+        Vec2 totalForce = force + dragForce;
+        
+        Vec2 acceleration = totalForce * (1.0f / mass);
         velocity = velocity + acceleration * dt;
         position = position + velocity * dt;
-        force = Vec2(0,0);
+        force = Vec2(0, 0);
     }
 };

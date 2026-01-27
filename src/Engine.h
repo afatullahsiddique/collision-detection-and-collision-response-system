@@ -30,4 +30,5 @@ public:
     void createTestScene();
     bool initWindow();
     void processInput();
+    void checkBounds();  // Check window boundaries
 };
