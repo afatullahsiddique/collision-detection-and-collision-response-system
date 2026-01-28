@@ -1,0 +1,33 @@
+Setup:
+    download vs code
+
+    Open MSYS2 MinGW64 terminal using terminal:
+        pacman -S --needed mingw-w64-x86_64-toolchain
+
+    In MSYS2 MinGW64 terminal:
+        pacman -S mingw-w64-x86_64-freeglut
+                                        This installs:
+                                            OpenGL
+                                            GLUT headers
+                                            Libraries
+    
+    Open VS Code Terminal
+    (make sure it’s MinGW64, not PowerShell)
+        g++ main.cpp -o physics ^ -lfreeglut -lopengl32 -lglu32
+
+    Run the project ./physics
+
+
+
+    In UBUNTU OR DEBIAN
+    
+    STEP 1: Install dependencies
+        sudo apt update
+        sudo apt install g++ freeglut3-dev mesa-common-dev
+
+    STEP 2: Compile
+        g++ main.cpp -o physics -lglut -lGL -lGLU
+
+    STEP 3: Run
+        ./physics
+
