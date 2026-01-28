@@ -155,7 +155,7 @@ void applyImpulse(Entity* a, Entity* b, Vec2 normal) {
 
 void checkCollisions() {
 
-    for (size_t i = 0; i < world.size(); ++i) {
+    for (size_t i = 0; i < world.size(); i++) {
 
         for (size_t j = i + 1; j < world.size(); ++j) {
 
